@@ -9,8 +9,8 @@ import {
   DialogHeader,
   DialogTrigger,
 } from "@/Components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Input } from "@/Components/ui/input"
+import { Label } from "@/Components/ui/label"
 
 function Message() {
   const [name, setName] = useState("")
