@@ -1,4 +1,3 @@
-import { div } from "framer-motion/client";
 import React from "react";
 import ExpandableCardDemo from "./expandable-card-demo-grid";
 
