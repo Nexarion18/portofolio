@@ -1,4 +1,3 @@
-import { image } from "framer-motion/client";
 import { cn } from "../../lib/util";
 import { useRef } from "react";
 

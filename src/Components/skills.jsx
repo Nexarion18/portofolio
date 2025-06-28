@@ -1,6 +1,8 @@
-import { FaHtml5, FaCss3Alt, FaReact, FaNodeJs } from "react-icons/fa";
+import { useState } from "react";
+import { FaHtml5, FaCss3Alt, FaReact } from "react-icons/fa";
 import { SiTailwindcss, SiJavascript, SiMysql, SiC, SiVite, SiNextdotjs, SiGit } from "react-icons/si";
-
+import Education from "./Education";
+import { Sertif } from "./sertif";
 const skills = [
   { name: "HTML", icon: <FaHtml5 className="text-orange-600" /> },
   { name: "CSS", icon: <FaCss3Alt className="text-blue-500" /> },
@@ -16,24 +18,57 @@ const skills = [
 ];
 
 export default function SkillsSection() {
-  return (
-            <div id="porto" className="mx-auto sm:w-full md:w-3/4 lg:w-4xl px-4 mt-10">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl text-left pb-5">SKILLS</h1>
-    
-    <section className="py-16 text-white text-center">
-      <div className="max-w-md mx-auto  grid grid-cols-5 sm:grid-cols-5 md:grid-cols-5 gap-4 justify-items-center">
-        {skills.map((skill, idx) => (
+  const [activeTab, setActiveTab] = useState("skills");
 
-            <div
-            key={idx}
-            className="w-16 sm:w-15 md:w-20 lg:w-20 xl:w-32 h-16 sm:h-15 md:h-20 lg:h-20 xl:h-32 flex items-center justify-center border border-gray-300 rounded-2xl hover:scale-105 transition-all"
-            title={skill.name}
-            >
-              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">{skill.icon}</div>
-            </div>
-        ))}
+  return (
+    <div id="porto" className="mx-auto sm:w-full md:w-3/4 lg:w-4xl px-4 mt-10">
+      <div className="flex justify-left space-x-2 mb-0">
+        <button
+          className={`px-4 py-2 rounded-md ${activeTab === "skills" ? "bg-gray-100" : "bg-white"}`}
+          onClick={() => setActiveTab("skills")}
+        >
+          Tech Stack
+        </button>
+        <button
+          className={`px-4 py-2 rounded-md ${activeTab === "tools" ? "bg-gray-100" : "bg-white"}`}
+          onClick={() => setActiveTab("tools")}
+        >
+          Education
+        </button>
+        <button
+          className={`px-4 py-2 rounded-md ${activeTab === "sertif" ? "bg-gray-100" : "bg-white"}`}
+          onClick={() => setActiveTab("sertif")}
+        >
+          Certificate
+        </button>
       </div>
-    </section>
-        </div>
+      {activeTab === "skills" && (
+        <section className="py-7 text-white text-center">
+          <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 px-4">
+            {skills.map((skill, idx) => (
+              <div
+                key={idx}
+                className="flex items-center gap-3 px-4 py-3 border border-gray-300 bg-white text-black rounded-xl hover:scale-105 transition-all"
+              >
+                <div className="text-2xl sm:text-3xl md:text-4xl">{skill.icon}</div>
+                <span className="text-sm sm:text-base md:text-lg">{skill.name}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+      {activeTab === "tools" && (
+        <section className="py-7 text-center">
+          <Education />
+        </section>
+      )}
+      {activeTab === "sertif" && (
+        <section className="py-7 text-center text-white">
+          <Sertif />
+        </section>
+      )
+      }
+
+    </div >
   );
 }
