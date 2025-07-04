@@ -215,13 +215,13 @@ const content = [
     ),
   },
   {
-    title: "Real time ",
+    title: "Analisis SWOT",
     description:
       "See changes as they happen. With our platform, you can track every modification in real time. No more confusion about the latest version of your project. Say goodbye to the chaos of version control and embrace the simplicity of real-time updates.",
     content: (
       <div className="flex h-full w-full items-center justify-center text-white">
         <img
-          src="../images/swot-sertif.jpg"
+          src="../images/swot-sertif.png"
           width={300}
           height={300}
           className="h-full w-full object-cover"

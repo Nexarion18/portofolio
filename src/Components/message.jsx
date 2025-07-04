@@ -65,7 +65,7 @@ function Message() {
               <Label htmlFor="name">Name</Label>
               <Input
                 id="name"
-                placeholder="Pedro Duarte"
+                placeholder="type your name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
