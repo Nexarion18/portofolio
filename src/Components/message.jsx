@@ -83,16 +83,16 @@ function Message() {
               />
             </div>
             {success && (
-              <p className="text-green-600 text-sm">✅ Pesan berhasil dikirim!</p>
+              <p className="text-green-600 text-sm">Pesan berhasil dikirim!</p>
             )}
           </div>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline" type="button">
+              <Button className="mt-4 hover:bg-gray-300 transform hover:scale-105" type="button">
                 Cancel
               </Button>
             </DialogClose>
-            <Button type="submit" disabled={loading} >
+            <Button className="mt-4 hover:bg-gray-300 transform hover:scale-105" type="submit" disabled={loading} >
               {loading ? "Sending..." : "Submit"}
             </Button>
           </DialogFooter>
