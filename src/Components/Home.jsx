@@ -1,12 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { GlareCard } from "./ui/glare-card";
 import Contact from "./Contact";
 import Message from "./message";
 import { motion, AnimatePresence } from "framer-motion";
+
+const roles = ["Front End", "Backend", "Fullstack"];
+
 const Home = () => {
   const [showDownloadNotification, setDownloadNotification] = useState(false);
+  const [roleIndex, setRoleIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   const handleDownloadCV = () => {
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = "../images/fendisCV.jpg";
     link.download = "CV_FendiPermadi";
     document.body.appendChild(link);
@@ -21,11 +33,32 @@ const Home = () => {
   };
 
   return (
-    <div id="home" className="flex flex-col w-3/4 mx-auto items-center py-30 justify min-h-screen gap-3 md:flex md:flex-row md:mx-auto md:px-4 lg:mx-auto lg:px-4">
+    <div
+      id="home"
+      className="flex flex-col w-3/4 mx-auto items-center py-30 justify min-h-screen gap-3 md:flex md:flex-row md:mx-auto md:px-4 lg:mx-auto lg:px-4"
+    >
       <div className="mx-auto text-center md:text-left md:w-3/4 lg:w-4xl px-8 ">
         <h1 className="text-sm md:text-base text-gray-400">FENDI PERMADI</h1>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-semibold">Front End</h1>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-semibold">Developer</h1>
+        <div
+          className="relative overflow-hidden"
+          style={{ minHeight: "1.2em" }}
+        >
+          <AnimatePresence mode="wait">
+            <motion.h1
+              key={roles[roleIndex]}
+              initial={{ y: 40, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -40, opacity: 0 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-semibold"
+            >
+              {roles[roleIndex]}
+            </motion.h1>
+          </AnimatePresence>
+        </div>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-semibold">
+          Developer
+        </h1>
         <h1 className="mt-5 text-sm md:text-base text-gray-400">
           Undergraduate Information System Student at UPN "Veteran" Jakarta
         </h1>
@@ -33,9 +66,7 @@ const Home = () => {
           <Contact />
         </div>
         <div className="inline-flex items-center justify-center bg-gray-200 text-gray-600 font-semibold h-12 px-6 py-2 w-auto rounded-lg hover:bg-gray-300 transform hover:scale-105">
-          <button onClick={handleDownloadCV}>
-            Download CV
-          </button>
+          <button onClick={handleDownloadCV}>Download CV</button>
         </div>
         <div className="inline-flex items-center justify-center text-gray-600 font-semibold mt-4">
           <Message />
@@ -56,10 +87,14 @@ const Home = () => {
       </div>
       <div className="px-10 mt-5 mx-auto md:mb-24 md:mt-0 lg:mt-0">
         <GlareCard>
-          <img src="../images/profile.jpg" alt="Profile" className="w-full h-full object-cover rounded-xl" />
+          <img
+            src="../images/profile.jpg"
+            alt="Profile"
+            className="w-full h-full object-cover rounded-xl"
+          />
         </GlareCard>
       </div>
     </div>
   );
-}
+};
 export default Home;

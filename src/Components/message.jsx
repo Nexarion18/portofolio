@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { Button } from "@/Components/ui/button"
+import { useState } from "react";
+import { Button } from "@/Components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -8,20 +8,20 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTrigger,
-} from "@/Components/ui/dialog"
-import { Input } from "@/Components/ui/input"
-import { Label } from "@/Components/ui/label"
+} from "@/Components/ui/dialog";
+import { Input } from "@/Components/ui/input";
+import { Label } from "@/Components/ui/label";
 
 function Message() {
-  const [name, setName] = useState("")
-  const [message, setMessage] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    setSuccess(false)
+    e.preventDefault();
+    setLoading(true);
+    setSuccess(false);
 
     try {
       const res = await fetch("/.netlify/functions/discord", {
@@ -33,18 +33,18 @@ function Message() {
           message: `Pesan dari ${name}: ${message}`,
           username: name || "Anonymous",
         }),
-      })
+      });
 
-      if (!res.ok) throw new Error("Gagal Mengirim Pesan")
-      setSuccess(true)
-      setName("")
-      setMessage("")
+      if (!res.ok) throw new Error("Gagal Mengirim Pesan");
+      setSuccess(true);
+      setName("");
+      setMessage("");
     } catch (err) {
-      alert("Gagal mengirim pesan.")
+      alert("Gagal mengirim pesan.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <Dialog>
@@ -56,9 +56,7 @@ function Message() {
       <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
-            <DialogDescription>
-              Leave me your message here!
-            </DialogDescription>
+            <DialogDescription>Leave your message here!</DialogDescription>
           </DialogHeader>
           <div className="grid gap-4">
             <div className="grid gap-3">
@@ -88,18 +86,25 @@ function Message() {
           </div>
           <DialogFooter>
             <DialogClose asChild>
-              <Button className="mt-4 hover:bg-gray-300 transform hover:scale-105" type="button">
+              <Button
+                className="mt-4 hover:bg-gray-300 transform hover:scale-105"
+                type="button"
+              >
                 Cancel
               </Button>
             </DialogClose>
-            <Button className="mt-4 hover:bg-gray-300 transform hover:scale-105" type="submit" disabled={loading} >
+            <Button
+              className="mt-4 hover:bg-gray-300 transform hover:scale-105"
+              type="submit"
+              disabled={loading}
+            >
               {loading ? "Sending..." : "Submit"}
             </Button>
           </DialogFooter>
         </form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
 
-export default Message
+export default Message;
